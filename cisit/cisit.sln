@@ -5,11 +5,6 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cisit", "cisit\cisit.csproj", "{EAE81AC7-903C-4BA7-8BE5-9C8501C8DA8F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2668F7E8-E047-4B3F-A238-3158DEB09FB3}"
-	ProjectSection(SolutionItems) = preProject
-		cisit\CisitProgram.cs = cisit\CisitProgram.cs
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
