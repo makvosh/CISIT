@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.bcalculate = new System.Windows.Forms.Button();
             this.bAbout = new System.Windows.Forms.Button();
             this.cbDefaultParams = new System.Windows.Forms.ComboBox();
@@ -36,7 +37,11 @@
             this.tStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.rTBResult = new System.Windows.Forms.RichTextBox();
+            this.nUDPercentTransferedEnergy = new System.Windows.Forms.NumericUpDown();
+            this.lTransferedEnergy = new System.Windows.Forms.Label();
+            this.timerSetReady = new System.Windows.Forms.Timer(this.components);
             this.ssStatusStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDPercentTransferedEnergy)).BeginInit();
             this.SuspendLayout();
             // 
             // bcalculate
@@ -65,6 +70,7 @@
             this.bAbout.TabIndex = 1;
             this.bAbout.Text = "About";
             this.bAbout.UseVisualStyleBackColor = true;
+            this.bAbout.Click += new System.EventHandler(this.bAbout_Click);
             // 
             // cbDefaultParams
             // 
@@ -74,7 +80,7 @@
             "Ar-1000 [30keV]"});
             this.cbDefaultParams.Location = new System.Drawing.Point(96, 12);
             this.cbDefaultParams.Name = "cbDefaultParams";
-            this.cbDefaultParams.Size = new System.Drawing.Size(244, 21);
+            this.cbDefaultParams.Size = new System.Drawing.Size(138, 21);
             this.cbDefaultParams.TabIndex = 2;
             this.cbDefaultParams.SelectedIndexChanged += new System.EventHandler(this.cbDefaultParams_SelectedIndexChanged);
             // 
@@ -105,14 +111,17 @@
             // 
             this.tStripStatusLabel.AutoSize = false;
             this.tStripStatusLabel.BackColor = System.Drawing.Color.LimeGreen;
+            this.tStripStatusLabel.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.tStripStatusLabel.Name = "tStripStatusLabel";
             this.tStripStatusLabel.Size = new System.Drawing.Size(17, 17);
             // 
             // tsslStatus
             // 
             this.tsslStatus.Name = "tsslStatus";
-            this.tsslStatus.Size = new System.Drawing.Size(48, 17);
-            this.tsslStatus.Text = "Ready...";
+            this.tsslStatus.Size = new System.Drawing.Size(39, 17);
+            this.tsslStatus.Text = "Ready";
             // 
             // rTBResult
             // 
@@ -125,11 +134,42 @@
             this.rTBResult.TabIndex = 5;
             this.rTBResult.Text = "Click \"Calculate\" for calculation...";
             // 
+            // nUDPercentTransferedEnergy
+            // 
+            this.nUDPercentTransferedEnergy.Font = new System.Drawing.Font("David", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.nUDPercentTransferedEnergy.Location = new System.Drawing.Point(15, 49);
+            this.nUDPercentTransferedEnergy.Name = "nUDPercentTransferedEnergy";
+            this.nUDPercentTransferedEnergy.Size = new System.Drawing.Size(49, 23);
+            this.nUDPercentTransferedEnergy.TabIndex = 7;
+            this.nUDPercentTransferedEnergy.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // lTransferedEnergy
+            // 
+            this.lTransferedEnergy.AutoSize = true;
+            this.lTransferedEnergy.Font = new System.Drawing.Font("Cordia New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lTransferedEnergy.Location = new System.Drawing.Point(70, 51);
+            this.lTransferedEnergy.Name = "lTransferedEnergy";
+            this.lTransferedEnergy.Size = new System.Drawing.Size(164, 18);
+            this.lTransferedEnergy.TabIndex = 8;
+            this.lTransferedEnergy.Text = "% of transfered energy";
+            // 
+            // timerSetReady
+            // 
+            this.timerSetReady.Interval = 5000;
+            this.timerSetReady.Tick += new System.EventHandler(this.timerSetReady_Tick);
+            // 
             // fMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(624, 441);
+            this.Controls.Add(this.lTransferedEnergy);
+            this.Controls.Add(this.nUDPercentTransferedEnergy);
             this.Controls.Add(this.rTBResult);
             this.Controls.Add(this.ssStatusStrip);
             this.Controls.Add(this.label1);
@@ -137,12 +177,14 @@
             this.Controls.Add(this.bAbout);
             this.Controls.Add(this.bcalculate);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "fMain";
             this.Text = "Cluster-Ion Surface Interaction Tool v0.1a";
             this.Load += new System.EventHandler(this.fMain_Load);
             this.ssStatusStrip.ResumeLayout(false);
             this.ssStatusStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDPercentTransferedEnergy)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,6 +200,9 @@
         private System.Windows.Forms.ToolStripStatusLabel tsslStatus;
         private System.Windows.Forms.ToolStripStatusLabel tStripStatusLabel;
         private System.Windows.Forms.RichTextBox rTBResult;
+        private System.Windows.Forms.NumericUpDown nUDPercentTransferedEnergy;
+        private System.Windows.Forms.Label lTransferedEnergy;
+        private System.Windows.Forms.Timer timerSetReady;
     }
 }
 

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace cisit
 {
@@ -42,8 +43,31 @@ namespace cisit
 
         private void bcalculate_Click(object sender, EventArgs e)
         {
-            CisitProgram CisitCalculation = new CisitProgram(atomic_number_of_atom, number_of_atoms, energy_of_cluster);
-            rTBResult.Lines = CisitCalculation.Calculate();
+            tStripStatusLabel.BackColor = Color.Yellow;                                                                             //Yellow time
+            tsslStatus.Text = "Calculating...";
+
+            CisitProgram CisitCalculation = new CisitProgram(atomic_number_of_atom, number_of_atoms, energy_of_cluster);            //create Main Class
+            rTBResult.Lines = CisitCalculation.Calculate();                                                                         //calculating
+
+            Thread.Sleep(500);                                                                                                      //pause
+
+            tStripStatusLabel.BackColor = Color.LimeGreen;                                                                          //Green time again
+            tsslStatus.Text = "Finished!";
+            timerSetReady.Enabled = true;  //timer for Finished! -> Ready
+        }
+
+        private void timerSetReady_Tick(object sender, EventArgs e)
+        {
+            if (tsslStatus.Text == "Finished") 
+            {
+                tsslStatus.Text = "Ready";
+                timerSetReady.Enabled = false;
+            }
+        }
+
+        private void bAbout_Click(object sender, EventArgs e)
+        {
+            tStripStatusLabel.BackColor = Color.Yellow;
         }
     }
 }

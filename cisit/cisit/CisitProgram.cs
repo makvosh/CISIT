@@ -111,8 +111,16 @@ namespace cisit
             return (af * m2 * E) / (Z1 * Z2 * e2 * (m1 + m2));  //e2 = e^2, af - radius of the Thomas-Fermi screening
         }
 
+        private double CalcMaxTransfElastic_energy() //Maximal transfer energy in elastic collision: Tm = 4*E*m1*m2*(m1+m2)^(-2) 
+        {
+            double m1 = Ion1.Get_mass();
+            double m2 = Ion2.Get_mass();
+            double E = Ion1.Get_energy();
+            return 4 * E * m1 * m2 * Math.Pow((m1 + m2), -2); 
+        }
+
         public string[] Calculate()
-        {          
+        {   
             string[] result = new string[1];
             result[0] = "Dimensionless energy: " + Convert.ToString(CalcDimensionless_energy());
             /*result[1] = "Cluster consist of Ar";
