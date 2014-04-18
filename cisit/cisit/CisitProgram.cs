@@ -50,6 +50,7 @@ namespace cisit
                 return energy * elcharge;
             }
         }
+
         private class Cluster
         {
             private byte atomic_number_of_atoms;
@@ -89,10 +90,12 @@ namespace cisit
         //private Cluster firstCluster = new Cluster();
         private Ion Ion1 = new Ion();
         private Ion Ion2 = new Ion();
+        private byte percent_of_transfered_energy;
 
-        public CisitProgram(byte atomic_number_of_atoms, int number_of_atoms, int energy_of_cluster)
+        public CisitProgram(byte atomic_number_of_atoms, int number_of_atoms, int energy_of_cluster, byte percent_of_transfered_energy1)
         {
             //firstCluster.ChangeParams(atomic_number_of_atoms, number_of_atoms, energy_of_cluster);
+            percent_of_transfered_energy = percent_of_transfered_energy1;
             Ion1.ChangeParams(18, 1, 39.948);
             Ion2.ChangeParams(18, 1, 39.948);
         }
@@ -104,7 +107,7 @@ namespace cisit
             double m1 = Ion1.Get_mass();
             double m2 = Ion2.Get_mass();
             double e2 = Ion1.elcharge * Ion1.elcharge;
-            double a0 = 0.529*Math.Pow(10.0, -11.0); //meters
+            double a0 = 0.529 * Math.Pow(10.0, -11.0); //meters
             double af = 0.8853 * a0 * (Math.Pow(Z1, 2 / 3) + Math.Pow(Z2, 2 / 3)); //from potential Lindhardt
             double E = Ion1.Get_energy();
 
@@ -119,16 +122,19 @@ namespace cisit
             return 4 * E * m1 * m2 * Math.Pow((m1 + m2), -2); 
         }
 
+        private double CalcDimensionless_parameter_t(byte percent_of_transfered_energy) //substitution argument for dSigma  
+        {
+            double T = percent_of_transfered_energy/100.0*CalcMaxTransfElastic_energy(); //value of transfered energy to second ion
+            return Math.Pow(CalcDimensionless_energy(), 2) * T / CalcMaxTransfElastic_energy();
+        }
+
         public string[] Calculate()
         {   
-            string[] result = new string[1];
-            result[0] = "Dimensionless energy: " + Convert.ToString(CalcDimensionless_energy());
-            /*result[1] = "Cluster consist of Ar";
-            result[2] = "Atomic number Ar = " + Convert.ToString(firstCluster.Get_atomic_number_of_atoms())
-                        + ", number of atoms in the cluster " + Convert.ToString(firstCluster.Get_number_of_atoms())
-                        + ", energy of cluster" + Convert.ToString(firstCluster.Get_energy_of_cluster())
-                        + " eV";
-            return result;*/
+            string[] result = new string[3];
+            result[0] = "Dimensionless energy = " + Convert.ToString(CalcDimensionless_energy());
+            result[1] = "Maximal transfer energy = " + Convert.ToString(CalcMaxTransfElastic_energy());
+            result[2] = "Dimentionless parameter (t) = " + Convert.ToString(CalcDimensionless_parameter_t(percent_of_transfered_energy));
+
             return result;
         }
     }

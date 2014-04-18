@@ -46,13 +46,15 @@ namespace cisit
             tStripStatusLabel.BackColor = Color.Yellow;                                                                             //Yellow time
             tsslStatus.Text = "Calculating...";
 
-            CisitProgram CisitCalculation = new CisitProgram(atomic_number_of_atom, number_of_atoms, energy_of_cluster);            //create Main Class
+            CisitProgram CisitCalculation = new CisitProgram(                                                                       //create Main Class
+                atomic_number_of_atom, 
+                number_of_atoms, energy_of_cluster, 
+                Convert.ToByte(nUDPercentTransferedEnergy.Value)
+            );            
             rTBResult.Lines = CisitCalculation.Calculate();                                                                         //calculating
 
-            Thread.Sleep(500);                                                                                                      //pause
-
             tStripStatusLabel.BackColor = Color.LimeGreen;                                                                          //Green time again
-            tsslStatus.Text = "Finished!";
+            tsslStatus.Text = "Finished";
             timerSetReady.Enabled = true;  //timer for Finished! -> Ready
         }
 
