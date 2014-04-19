@@ -40,6 +40,7 @@
             this.nUDPercentTransferedEnergy = new System.Windows.Forms.NumericUpDown();
             this.lTransferedEnergy = new System.Windows.Forms.Label();
             this.timerSetReady = new System.Windows.Forms.Timer(this.components);
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.ssStatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUDPercentTransferedEnergy)).BeginInit();
             this.SuspendLayout();
@@ -162,12 +163,20 @@
             this.timerSetReady.Interval = 5000;
             this.timerSetReady.Tick += new System.EventHandler(this.timerSetReady_Tick);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(323, 196);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 9;
+            // 
             // fMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(624, 441);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.lTransferedEnergy);
             this.Controls.Add(this.nUDPercentTransferedEnergy);
             this.Controls.Add(this.rTBResult);
@@ -203,6 +212,7 @@
         private System.Windows.Forms.NumericUpDown nUDPercentTransferedEnergy;
         private System.Windows.Forms.Label lTransferedEnergy;
         private System.Windows.Forms.Timer timerSetReady;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
