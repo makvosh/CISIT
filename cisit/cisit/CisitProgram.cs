@@ -91,13 +91,17 @@ namespace cisit
         private Ion Ion1 = new Ion();
         private Ion Ion2 = new Ion();
         private byte percent_of_transfered_energy;
+        double const_lambda, const_m, const_q;
 
-        public CisitProgram(byte atomic_number_of_atoms, int number_of_atoms, int energy_of_cluster, byte percent_of_transfered_energy1)
+        public CisitProgram(byte atomic_number_of_atoms, int number_of_atoms, int energy_of_cluster, byte percent_of_transfered_energy1, double const_lambda1, double const_m1, double const_q1)
         {
             //firstCluster.ChangeParams(atomic_number_of_atoms, number_of_atoms, energy_of_cluster);
             percent_of_transfered_energy = percent_of_transfered_energy1;
             Ion1.ChangeParams(18, 1, 39.948);
             Ion2.ChangeParams(18, 1, 39.948);
+            const_lambda = const_lambda1;
+            const_m = const_m1;
+            const_q = const_q1;
         }
 
         private double CalcDimensionless_energy()
@@ -128,12 +132,19 @@ namespace cisit
             return Math.Pow(CalcDimensionless_energy(), 2) * T / CalcMaxTransfElastic_energy();
         }
 
+        private double CalcReducedScatteringCrossSection(byte percent_of_transfered_energy, double lambda, double m, double q)
+        {
+            double t=CalcDimensionless_parameter_t(percent_of_transfered_energy);
+            return lambda * Math.Pow(t, 1 / 2 - m) * Math.Pow((1 + Math.Pow(2 * lambda * Math.Pow(t, 1 - m), q)), -1.0 / q);
+        }
+
         public string[] Calculate()
         {   
-            string[] result = new string[3];
+            string[] result = new string[4];
             result[0] = "Dimensionless energy = " + Convert.ToString(CalcDimensionless_energy());
             result[1] = "Maximal transfer energy = " + Convert.ToString(CalcMaxTransfElastic_energy());
             result[2] = "Dimentionless parameter (t) = " + Convert.ToString(CalcDimensionless_parameter_t(percent_of_transfered_energy));
+            result[3] = "Reduced scattering cross-section = " + Convert.ToString(CalcReducedScatteringCrossSection(percent_of_transfered_energy, const_lambda, const_m, const_q));
 
             return result;
         }

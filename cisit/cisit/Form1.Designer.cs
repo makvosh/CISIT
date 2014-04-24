@@ -40,7 +40,12 @@
             this.nUDPercentTransferedEnergy = new System.Windows.Forms.NumericUpDown();
             this.lTransferedEnergy = new System.Windows.Forms.Label();
             this.timerSetReady = new System.Windows.Forms.Timer(this.components);
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tB_lambda = new System.Windows.Forms.TextBox();
+            this.tB_m = new System.Windows.Forms.TextBox();
+            this.tB_q = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.ssStatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUDPercentTransferedEnergy)).BeginInit();
             this.SuspendLayout();
@@ -128,10 +133,10 @@
             // 
             this.rTBResult.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.rTBResult.Font = new System.Drawing.Font("Cordia New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.rTBResult.Location = new System.Drawing.Point(12, 326);
+            this.rTBResult.Location = new System.Drawing.Point(12, 159);
             this.rTBResult.Name = "rTBResult";
             this.rTBResult.ReadOnly = true;
-            this.rTBResult.Size = new System.Drawing.Size(480, 87);
+            this.rTBResult.Size = new System.Drawing.Size(480, 254);
             this.rTBResult.TabIndex = 5;
             this.rTBResult.Text = "Click \"Calculate\" for calculation...";
             // 
@@ -160,15 +165,69 @@
             // 
             // timerSetReady
             // 
-            this.timerSetReady.Interval = 5000;
+            this.timerSetReady.Interval = 3000;
             this.timerSetReady.Tick += new System.EventHandler(this.timerSetReady_Tick);
             // 
-            // textBox1
+            // tB_lambda
             // 
-            this.textBox1.Location = new System.Drawing.Point(323, 196);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 9;
+            this.tB_lambda.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tB_lambda.Font = new System.Drawing.Font("David", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tB_lambda.Location = new System.Drawing.Point(50, 78);
+            this.tB_lambda.Name = "tB_lambda";
+            this.tB_lambda.Size = new System.Drawing.Size(40, 21);
+            this.tB_lambda.TabIndex = 9;
+            this.tB_lambda.Text = "2,54";
+            // 
+            // tB_m
+            // 
+            this.tB_m.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tB_m.Font = new System.Drawing.Font("David", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tB_m.Location = new System.Drawing.Point(50, 105);
+            this.tB_m.Name = "tB_m";
+            this.tB_m.Size = new System.Drawing.Size(40, 21);
+            this.tB_m.TabIndex = 10;
+            this.tB_m.Text = "0,25";
+            // 
+            // tB_q
+            // 
+            this.tB_q.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tB_q.Font = new System.Drawing.Font("David", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tB_q.Location = new System.Drawing.Point(50, 132);
+            this.tB_q.Name = "tB_q";
+            this.tB_q.Size = new System.Drawing.Size(40, 21);
+            this.tB_q.TabIndex = 11;
+            this.tB_q.Text = "0,475";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Cordia New", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(20, 80);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(27, 16);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "λ =";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Cordia New", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(17, 107);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(31, 16);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "m =";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Cordia New", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Location = new System.Drawing.Point(20, 134);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(28, 16);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "q =";
             // 
             // fMain
             // 
@@ -176,7 +235,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(624, 441);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.tB_q);
+            this.Controls.Add(this.tB_m);
+            this.Controls.Add(this.tB_lambda);
             this.Controls.Add(this.lTransferedEnergy);
             this.Controls.Add(this.nUDPercentTransferedEnergy);
             this.Controls.Add(this.rTBResult);
@@ -212,7 +276,12 @@
         private System.Windows.Forms.NumericUpDown nUDPercentTransferedEnergy;
         private System.Windows.Forms.Label lTransferedEnergy;
         private System.Windows.Forms.Timer timerSetReady;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tB_lambda;
+        private System.Windows.Forms.TextBox tB_m;
+        private System.Windows.Forms.TextBox tB_q;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 

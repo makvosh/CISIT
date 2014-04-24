@@ -49,7 +49,10 @@ namespace cisit
             CisitProgram CisitCalculation = new CisitProgram(                                                                       //create Main Class
                 atomic_number_of_atom, 
                 number_of_atoms, energy_of_cluster, 
-                Convert.ToByte(nUDPercentTransferedEnergy.Value)
+                Convert.ToByte(nUDPercentTransferedEnergy.Value),
+                Convert.ToDouble(tB_lambda.Text),
+                Convert.ToDouble(tB_m.Text),
+                Convert.ToDouble(tB_q.Text)
             );            
             rTBResult.Lines = CisitCalculation.Calculate();                                                                         //calculating
 
@@ -70,6 +73,11 @@ namespace cisit
         private void bAbout_Click(object sender, EventArgs e)
         {
             tStripStatusLabel.BackColor = Color.Yellow;
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
